@@ -23,3 +23,4 @@ import 'solidity_lib/Math/MathLib.sol';
 ##### 已有方法
 
 MathLib.Random(uint 前端传入的随机数,uint8 长度) 随机数
+注意:传入的长度必须小于或等于255
