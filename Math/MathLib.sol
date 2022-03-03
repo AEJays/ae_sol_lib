@@ -8,6 +8,7 @@ library MathLib{
        _length: 需要随机的长度 如：20则是20以下的所有随机数,不包括0
      */
     function Random(uint _number,uint8 _length) internal view returns(uint) {
+        require(_length>256,"attribute _length must be less than or equal to 255");
         uint randomNum;
         // uint8 rand = uint8(uint(keccak256(abi.encodePacked(block.timestamp,safe,blockhash(block.number - 1)))));
         uint time = uint(keccak256(abi.encodePacked(block.timestamp - _number)));
