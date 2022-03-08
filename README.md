@@ -34,7 +34,8 @@ import 'solidity_lib/Time/time.sol';
 ```
 ##### 已有方法
 
-timeStamp.formatHms(uint 时间戳)
+timeStamp.formatTime(uint 时间戳)
+算今天的时分秒
 
 ##### 更新方法
 ```bash

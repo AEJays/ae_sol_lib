@@ -4,17 +4,21 @@
     现有方法：
     formatHms(uint timestamp) 
     返回值：
-    uint[] 1：时 2：分 3：秒
+    uint[] 0：时 1：分 2：秒
  */
 pragma solidity ^0.8.0;
 
 library timeStamp {
-    function formatHms(uint timestamp) internal pure returns (uint[] memory time){
-        uint H = uint(timestamp / 60 / 60);
-        uint m = uint((timestamp / 60) - H * 60);
-        uint s = uint(timestamp - m * 60 - H * 60 * 60);
-        time[1] = H;
-        time[2] = m;
-        time[3] = s;
+    // 求一天内的时分秒
+    function formatTime(uint timestamp) internal pure returns (uint[3] memory time){
+        timestamp = ((timestamp % (1 days * 365)) % (1 days * 30)) % 1 days;
+        uint H = timestamp / 3600;
+        timestamp = timestamp % 3600;
+        uint m = timestamp / 60;
+        timestamp = timestamp % 60;
+        uint s = timestamp;
+        time[0] = H + 8;
+        time[1] = m;
+        time[2] = s;
     }
 }
