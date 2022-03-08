@@ -25,6 +25,17 @@ import 'solidity_lib/Math/MathLib.sol';
 MathLib.Random(uint 前端传入的随机数,uint8 长度) 随机数
 注意:传入的长度必须小于或等于100
 
+#### timeStamp
+引入方式
+在合约头增加以下代码
+
+```sol
+import 'solidity_lib/Time/time.sol';
+```
+##### 已有方法
+
+timeStamp.formatHms(uint 时间戳)
+
 ##### 更新方法
 ```bash
 npm i solidity_lib
