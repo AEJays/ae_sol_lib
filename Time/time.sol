@@ -17,7 +17,12 @@ library timeStamp {
         uint m = timestamp / 60;
         timestamp = timestamp % 60;
         uint s = timestamp;
-        time[0] = H + 8;
+        // 增加时区
+        H = H + 8; 
+        if(H>=24){
+            H = H - 24;
+        }
+        time[0] = H;
         time[1] = m;
         time[2] = s;
     }
