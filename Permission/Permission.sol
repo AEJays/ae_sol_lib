@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "hardhat/console.sol";  //日志
 
 abstract contract Permission{
     address owner; //所有者 默认为合约本身
@@ -20,7 +19,6 @@ abstract contract Permission{
     mapping(address=>bannerMes) isTempBanner; //临时ban禁
     bannerType[] bannerGroup;
     modifier isOwner(){
-        console.log(msg.sender,owner);
         require(msg.sender == owner||owner == address(0),"You don't have permission");
         _;
     }
