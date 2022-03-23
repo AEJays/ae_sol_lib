@@ -7,7 +7,6 @@
     uint[] 0：时 1：分 2：秒
  */
 pragma solidity ^0.8.0;
-
 library timeStamp {    
     // 求一天内的时分秒
     function formatTime(uint timestamp) internal pure returns (uint[3] memory time){
@@ -66,6 +65,11 @@ library timeStamp {
                     }
                 }
             }
+            if(Day<=12){
+                time[2] = leapYear[Month-1] - (12 - Day);
+            }else{
+                time[2] = Day - 12;
+            }
         }else{
             tDay = totalDay - ((Year-1970) * 365);
             for(uint i=0;i<12;i++){
@@ -79,9 +83,13 @@ library timeStamp {
                     }
                 }
             }
+            if(Day<=12){
+                time[2] = noleapYear[Month-1] - (12 - Day);
+            }else{
+                time[2] = Day - 12;
+            }
         }
         time[0] = Year;
         time[1] = Month;
-        time[2] = Day - 12;
     }
 }
