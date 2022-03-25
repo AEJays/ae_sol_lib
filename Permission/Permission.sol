@@ -40,10 +40,29 @@ abstract contract Permission{
         require(sql[msg.sender],"You cannot manipulate the database");
         _;
     }
+    modifier _isOwner(address user){
+        require(user == owner||owner == address(0),"You don't have permission");
+        _;
+    }
+    modifier _isBan(address user){
+        if(isBanner[user]){
+            revert("You are permanently banned");
+        }else if(isTempBanner[user].startTime<=block.timestamp&&isTempBanner[user].endTime>=block.timestamp){
+            revert("You have been temporarily banned");
+        }
+        _;
+    }
+    // 所有者默认包含owner
+    modifier _isAdmin(address user){
+        require(admins[user],"You are not an administrator");
+        _;
+    }
+    modifier _isSql(address user){
+        require(sql[user],"You cannot manipulate the database");
+        _;
+    }
     // 设置所有者
     function setOwner(address _owner) public payable isOwner{
-        admins[owner] = false; //清除原所有者的权限
-        sql[_owner] = false;
         owner = _owner;
         admins[_owner] = true;
         sql[_owner] = true;
