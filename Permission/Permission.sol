@@ -17,6 +17,7 @@ abstract contract Permission{
     mapping(address=>bool) admins; //管理员组校验
     mapping(address=>bool) isBanner; //是否被ban了
     mapping(address=>bannerMes) isTempBanner; //临时ban禁
+    mapping(address=>bool) sql; //是否为数据库操作人员
     bannerType[] bannerGroup;
     modifier isOwner(){
         require(msg.sender == owner||owner == address(0),"You don't have permission");
@@ -35,10 +36,17 @@ abstract contract Permission{
         require(admins[msg.sender],"You are not an administrator");
         _;
     }
+    modifier isSql(){
+        require(sql[msg.sender],"You cannot manipulate the database");
+        _;
+    }
     // 设置所有者
     function setOwner(address _owner) public payable isOwner{
+        admins[owner] = false; //清除原所有者的权限
+        sql[_owner] = false;
         owner = _owner;
-        admins[owner] = true;
+        admins[_owner] = true;
+        sql[_owner] = true;
     }
     // 获取所有者
     function getOwner() public view isOwner returns (address _owner){
@@ -47,10 +55,12 @@ abstract contract Permission{
     // 设置管理员 除了owner外的管理员 可执行ban禁玩家的操作 但不是权限所有者 只有所有者可设置
     function setAdmin(address _admin) public payable isOwner{
         admins[_admin] = true;
+        sql[_admin] = true;
     }
     // 取消管理员 所有者才可设置
     function removeAdmin(address _admin) public payable isOwner{
         admins[_admin] = false;
+        sql[_admin] = false;
     }
     // 设置永久ban禁地址
     function setBanner(address _banner) public payable isAdmin{
@@ -109,5 +119,13 @@ abstract contract Permission{
     // 获取所有ban禁地址
     function getBanner() public view isAdmin returns (bannerType[] memory banners){
         return bannerGroup;
+    }
+    // 设置数据库人员
+    function setSql(address dataBaser) public payable isAdmin{
+        sql[dataBaser] = true;
+    }
+    // 删除数据库人员
+    function rmSql(address dataBaser) public payable isAdmin{
+        sql[dataBaser] = false;
     }
 }
