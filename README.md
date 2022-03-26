@@ -158,4 +158,4 @@ contract a is permission{
 }
 ```
 
-权限库依赖代码
+[权限库依赖代码](http://202.43.232.79:9099/yuangke-team/permission_solidity)
