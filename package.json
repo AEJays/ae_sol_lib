@@ -1,6 +1,6 @@
 {
   "name": "solidity_lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "这是一个合约的lib库\r 安装方法\r ```bash\r npm i git@202.43.232.79:AEdge/soliditylib.git --save\r ```\r 引入方式",
   "main": "index.js",
   "scripts": {

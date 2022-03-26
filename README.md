@@ -96,3 +96,66 @@ setTempBanner(address,uint,uint) 设置临时禁用的地址 需要设置开始�
 removeTempBanner(address) 删除临时禁用的地址(解封) 类型需要对
 
 getBanner() 获取封禁列表 isBan 为true时 表示已被封禁 为false表示已解禁 
+
+setSql(address) 设置数据库人员
+
+rmSql(address) 删除数据库人员
+### 权限库已统一
+
+直接使用 Permission_abstract.sol 文件
+
+#### 引入方式
+```sol
+import 'solidity_lib/Permission/Permission_abstract.sol'
+// 继承即可
+contract a is permission {
+```
+
+使用前需要在构造函数中设置公共权限库地址
+
+完整引入例子如下
+
+```sol
+import 'solidity_lib/Permission/Permission_abstract.sol'
+contract a is permission{
+    constructor(address permissionAddress){
+        setPermission(permissionAddress);
+    }
+    address user;
+    <!-- 如果某个方法需要管理员权限 则用法如下 所有者默认为管理员 -->
+    function setUser(address _user) public payable isAdmin(msg.sender){
+        user = _user;
+    }
+    <!-- 如果某个方法需要所有者权限 则用法如下 -->
+    function getUser() public view returns isOwner(msg.sender) (address _user){
+        return user;
+    }
+    <!-- 如果某个方法需要数据库人员权限 则用法如下 -->
+    function getUser() public view returns isSql(msg.sender) (address _user){
+        return user;
+    }
+    <!-- 如果某个方法需要不被封禁的人员权限 则用法如下 -->
+    function getUser() public view returns isBan(msg.sender) (address _user){
+        return user;
+    }
+    <!-- isBan权限可以和以上的任何方法一起用 -->
+    <!-- 如果某个方法需要合约自身为管理员权限，则用法如下 -->
+    function getUser() public view returns _admin (address _user){
+        return user;
+    }
+    <!-- 如果某个方法需要合约自身为所有者权限，则用法如下 -->
+    function getUser() public view returns _owner (address _user){
+        return user;
+    }
+    <!-- 如果某个方法需要合约自身为不被封禁的人员权限，则用法如下 -->
+    function getUser() public view returns _ban (address _user){
+        return user;
+    }
+    <!-- 如果某个方法需要合约自身为数据库操控者的人员权限，则用法如下 -->
+    function getUser() public view returns _sql (address _user){
+        return user;
+    }
+}
+```
+
+权限库依赖代码
