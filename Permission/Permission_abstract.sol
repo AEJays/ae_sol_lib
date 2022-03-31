@@ -45,7 +45,7 @@ abstract contract permission{
         Perm._IsSql(user);
         _;
     }
-    function setPermissioin(address _address) public{
+    function setPermission(address _address) public{
         Perm = IPermission(_address);
     }
 }

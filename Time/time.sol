@@ -83,9 +83,11 @@ library timeStamp {
                     }
                 }
             }
-            if(Day<=12){
+            if(Day<12){
                 time[2] = noleapYear[Month-1] - (11 - Day);
                 Month = Month - 1;
+            }else if(Day == 12){
+                time[2] = noleapYear[Month-1];
             }else{
                 time[2] = Day - 12;
             }
