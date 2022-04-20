@@ -61,10 +61,6 @@ abstract contract Permission{
         require(sql[user],"You cannot manipulate the database");
         _;
     }
-    function _IsOwner(address user) public _isOwner(user){}
-    function _IsAdmin(address user) public _isAdmin(user){}
-    function _IsBan(address user) public _isBan(user){}
-    function _IsSql(address user) public _isSql(user){}
     // 设置所有者
     function setOwner(address _owner) public payable isOwner{
         owner = _owner;
