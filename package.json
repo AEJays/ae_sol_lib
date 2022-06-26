@@ -1,14 +1,14 @@
 {
   "name": "solidity_lib",
   "version": "1.0.1",
-  "description": "这是一个合约的lib库\r 安装方法\r ```bash\r npm i git@202.43.232.79:AEdge/soliditylib.git --save\r ```\r 引入方式",
+  "description": "这是一个合约的lib库\r 安装方法\r ```bash\r npm i git@github.com:AEdgejay/ae_sol_lib.git --save\r ```\r 引入方式",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@202.43.232.79:AEdge/soliditylib.git"
+    "url": "git@github.com:AEdgejay/ae_sol_lib.git"
   },
   "keywords": [],
   "author": "",

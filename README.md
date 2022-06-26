@@ -4,7 +4,7 @@
 
 安装方法
 ```bash
-npm i git@202.43.232.79:yuangke-team/soliditylib.git --save
+npm i git@github.com:AEdgejay/ae_sol_lib.git --save
 ```
 引入方式
 ```sol
